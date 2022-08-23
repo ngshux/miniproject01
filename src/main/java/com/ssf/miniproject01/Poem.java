@@ -17,28 +17,41 @@ import jakarta.json.JsonReader;
 public class Poem {
     private static final Logger logger = LoggerFactory.getLogger(Poem.class);
    
-    private String author;
-    private String title;
-    private String lines;
-    private String linecount;
+    private static String author;
+    private static String title;
+    private static String lines;
+    private static Integer linecount;
 
-    public static List<String> getPoemLines(String json) throws IOException{
-        String poemLine;
-        List<String> poemPara = new ArrayList<>();
+    public static String getPoemLines(String json, Integer lineCount, String lineText) throws IOException{
+        StringBuilder poemPara = new StringBuilder();
+        linecount = lineCount;
+
+        //Used for /lines.text
+        String[] poemLines = lineText.split("\n");
+        for (int i = 1; i < poemLines.length; i++) {
+            poemPara.append(poemLines[i])
+                    .append(System.lineSeparator());
+        }
+        //logger.info("PARA"+poemPara);
+
         try (InputStream is = new ByteArrayInputStream(json.getBytes())){
             JsonReader r = Json.createReader(is);
             JsonArray arr = r.readArray();
-
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject p = arr.getJsonObject(i);
-                String[] poemLines = p.get("lines").toString().split("\",\"");
-                //logger.info("line >> " + poemLine);
+                
+                author = p.get("author").toString();
+                title = p.get("title").toString();
+
+                /*String[] poemLines = p.get("lines").toString().split("\n");
+                //logger.info("line >> " + poemLines);
                 for (int j = 0; j < poemLines.length; j++) {
                     poemPara.add(poemLines[j]);
-                }
+                    poemPara.add("\n");
+                }*/
             }
         }
-        return poemPara;
+        return poemPara.toString();
     }
 
     public String getAuthor() {
@@ -65,11 +78,11 @@ public class Poem {
         this.lines = lines;
     }
 
-    public String getLinecount() {
+    public Integer getLinecount() {
         return linecount;
     }
 
-    public void setLinecount(String linecount) {
+    public void setLinecount(Integer linecount) {
         this.linecount = linecount;
     }
     

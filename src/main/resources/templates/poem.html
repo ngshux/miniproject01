@@ -5,9 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=>, initial-scale=1.0">
     <title>Document</title>
+    <link rel = "stylesheet" href ="style.css"/>
 </head>
 <body>
-    <h2>Recite after me</h2>
-    <div th:text = "${generatedPoem}"></div>
+    <div class ="wrapper">
+        <div class="content-box">
+            <h1><center>Retype thy poem!</center></h2>
+            <div class ="typing-text">
+                <p>
+                    <div th:text = "${generatedPoem}"></div>
+                </p>
+            </div>
+            <div class="content">
+                <ul class = "result-details">
+                    <li class = "time">
+                        <p> Time left: </p>
+                        <span><b>60</b>s</span>
+                    </li>
+                    <li class ="mistake">
+                        <p>Mistakes:</p>
+                        <span>0</span>
+                    </li>
+                    <li class ="wpm">
+                        <p>Words per Minute:</p>
+                        <span>0</span>
+                    </li>
+                    <li class ="cpm">
+                        <p>CPM:</p>
+                        <span>0</span>
+                    </li>
+                </ul>
+                <button>Try Again</button>
+            </div>
+            <div class="details">
+                Author Name: <div th:text = "${author}"></div>
+                Title of Poem: <div th:text = "${title}"></div>
+                Number of Lines: <div th:text = "${linecount}"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

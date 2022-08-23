@@ -20,7 +20,7 @@ public class PoemService {
     @Autowired
     RestTemplate template = new RestTemplate();
 
-    public List<String> generatePoem() {
+    public String generatePoem() {
         Random rand = new Random();
         Integer lineCount;
 
@@ -30,12 +30,15 @@ public class PoemService {
                             .path("/linecount,random/" + lineCount+ ";1")
                             .toUriString();
         logger.info("url >> " + poemURL);
+        String poemTextURL = poemURL +"/lines.text";
 
         ResponseEntity<String> resp = null;
-        List<String> generatedPoem = new ArrayList<>();
+        ResponseEntity<String> respText = null;
+        String generatedPoem= "";
         try {
             resp = template.getForEntity(poemURL, String.class);
-            generatedPoem = Poem.getPoemLines(resp.getBody());
+            respText = template.getForEntity(poemTextURL, String.class);
+            generatedPoem = Poem.getPoemLines(resp.getBody(),lineCount, respText.getBody());
             
         } catch (Exception e) {
             e.printStackTrace();

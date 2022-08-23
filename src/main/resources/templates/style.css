@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: violet;
+}
+
+.wrapper{
+    width: 800px;
+    padding: 40px;
+    backgound: #FFF;
+    border-radius: 10px;
+}
+
+.content-box{
+    padding: 13px 20px 0;
+    border-radius: 10px;
+    border: 1px solid #CCC;
+}
+
