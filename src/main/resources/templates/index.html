@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Typing speed test</title>
 </head>
+<style>
+.error {color:red}
+</style>
 
 <body>
     <h2>Type type poetry!</h2>
@@ -15,9 +18,12 @@
     </div>
     <br>
     <form action ="/generate" method="post">
-        <input type="text" name="username" placeholder="Enter Username">
+        <input type="text" name="username" placeholder="Enter Username" required>
+        <form:errors path ="username" placeholder="Please enter your name!" cssClass="error"/>
         <br><br>
         <button type="submit">Start!</button>
     </form>
+    <hr>
+    <a th:href ="@{/scoreboard}" action="/scoreboard">Check rankings</a>
 </body>
 </html>

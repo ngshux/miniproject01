@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -26,16 +27,17 @@ public class PoemController {
         return "index";
     }
 
-    @PostMapping("/generate")
-    public String generatePoem(@RequestBody String form, Model model){
-        String name = form;
-        String generatedPoem = service.generatePoem();
-        Poem p = new Poem();
+    @RequestMapping("/scoreboard")
+    public String getScores(Model model){
+        return "scoreboard";
+    }
 
-        model.addAttribute("username",name);
-        model.addAttribute("title",p.getTitle());
-        model.addAttribute("author",p.getAuthor());
-        model.addAttribute("linecount",p.getLinecount());
+    @PostMapping("/generate")
+    public String generatePoem(@RequestParam (required=true,value ="username") String name, Model model){
+        //String name = form;
+        String generatedPoem = service.generatePoem();
+
+        //model.addAttribute("username",name);
         model.addAttribute("generatedPoem", generatedPoem);
         
         return "poem";

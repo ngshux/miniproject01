@@ -19,7 +19,7 @@ public class Poem {
    
     private static String author;
     private static String title;
-    private static String lines;
+    private static String[] lines;
     private static Integer linecount;
 
     public static String getPoemLines(String json, Integer lineCount, String lineText) throws IOException{
@@ -27,9 +27,9 @@ public class Poem {
         linecount = lineCount;
 
         //Used for /lines.text
-        String[] poemLines = lineText.split("\n");
-        for (int i = 1; i < poemLines.length; i++) {
-            poemPara.append(poemLines[i])
+        String[] lines = lineText.split("\n");
+        for (int i = 1; i < lines.length; i++) {
+            poemPara.append(lines[i])
                     .append(System.lineSeparator());
         }
         //logger.info("PARA"+poemPara);
@@ -58,32 +58,20 @@ public class Poem {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLines() {
+    public String[] getLines() {
         return lines;
     }
 
-    public void setLines(String lines) {
+    public void setLines(String[] lines) {
         this.lines = lines;
     }
 
     public Integer getLinecount() {
         return linecount;
-    }
-
-    public void setLinecount(Integer linecount) {
-        this.linecount = linecount;
     }
     
 }

@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
-    <link rel = "stylesheet" href ="style.css"/>
+    <title>Type a poem!</title>        
+    <script src ="Typingtest.js"></script>
+    <link rel="stylesheet" href ="style.css">
 </head>
 <body>
     <div class ="wrapper">
+        <input type="text" class="input-field">
         <div class="content-box">
             <h1><center>Retype thy poem!</center></h2>
             <div class ="typing-text">
                 <p>
-                    <div th:text = "${generatedPoem}"></div>
+                    ///////////////////////////
+                    <div id="generated-poem" th:text = "${generatedPoem}" ></div>
                 </p>
             </div>
             <div class="content">
@@ -37,11 +40,7 @@
                 </ul>
                 <button>Try Again</button>
             </div>
-            <div class="details">
-                Author Name: <div th:text = "${author}"></div>
-                Title of Poem: <div th:text = "${title}"></div>
-                Number of Lines: <div th:text = "${linecount}"></div>
-            </div>
+
         </div>
     </div>
 </body>
