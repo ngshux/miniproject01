@@ -33,13 +33,9 @@ public class PoemController {
     }
 
     @PostMapping("/generate")
-    public String generatePoem(@RequestParam (required=true,value ="username") String name, Model model){
-        //String name = form;
-        String generatedPoem = service.generatePoem();
-
-        //model.addAttribute("username",name);
-        model.addAttribute("generatedPoem", generatedPoem);
-        
-        return "poem";
+    public String generatePoem(@RequestParam (required=true,value ="username") String name){
+        Poem generatedPoem = service.generatePoem();        
+        return generatedPoem.getSentence();
     }
+
 }

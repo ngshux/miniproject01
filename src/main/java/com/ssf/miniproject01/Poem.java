@@ -17,61 +17,29 @@ import jakarta.json.JsonReader;
 public class Poem {
     private static final Logger logger = LoggerFactory.getLogger(Poem.class);
    
-    private static String author;
-    private static String title;
-    private static String[] lines;
-    private static Integer linecount;
+    private String sentence;
 
-    public static String getPoemLines(String json, Integer lineCount, String lineText) throws IOException{
-        StringBuilder poemPara = new StringBuilder();
-        linecount = lineCount;
-
-        //Used for /lines.text
-        String[] lines = lineText.split("\n");
-        for (int i = 1; i < lines.length; i++) {
-            poemPara.append(lines[i])
-                    .append(System.lineSeparator());
-        }
-        //logger.info("PARA"+poemPara);
-
+    public static Poem getPoemLines(String json) throws IOException{
+        Poem p = new Poem();
         try (InputStream is = new ByteArrayInputStream(json.getBytes())){
             JsonReader r = Json.createReader(is);
             JsonArray arr = r.readArray();
             for (int i = 0; i < arr.size(); i++) {
-                JsonObject p = arr.getJsonObject(i);
-                
-                author = p.get("author").toString();
-                title = p.get("title").toString();
-
-                /*String[] poemLines = p.get("lines").toString().split("\n");
-                //logger.info("line >> " + poemLines);
-                for (int j = 0; j < poemLines.length; j++) {
-                    poemPara.add(poemLines[j]);
-                    poemPara.add("\n");
-                }*/
+                JsonObject l = arr.getJsonObject(i);
+                p.sentence = l.get("q").toString();
             }
         }
-        return poemPara.toString();
+        logger.info("AAAAAAAAAAAAAAA"+p.sentence);
+        return p;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getSentence() {
+        return sentence;
     }
 
-    public String getTitle() {
-        return title;
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
     }
 
-    public String[] getLines() {
-        return lines;
-    }
-
-    public void setLines(String[] lines) {
-        this.lines = lines;
-    }
-
-    public Integer getLinecount() {
-        return linecount;
-    }
     
 }
