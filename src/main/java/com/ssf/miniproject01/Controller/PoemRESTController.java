@@ -1,4 +1,4 @@
-package com.ssf.miniproject01;
+package com.ssf.miniproject01.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ssf.miniproject01.Model.Data;
+import com.ssf.miniproject01.Model.Poem;
+import com.ssf.miniproject01.Service.PoemService;
+import com.ssf.miniproject01.Service.ScoreRedis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +29,10 @@ public class PoemRESTController {
 
     @Autowired
     PoemService service;
+
+    @Autowired
+    ScoreRedis redisService;
+
     
     @GetMapping("/generate")
     public ResponseEntity<Poem> generatePoem(@RequestParam (required=true,value ="username") String name){
@@ -31,4 +40,9 @@ public class PoemRESTController {
         return ResponseEntity.ok(generatedPoem);
     }
 
+    @GetMapping(path = "/scoreboard", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Data[]> getAllRecords(){
+        Data[] dArr = redisService.getAllScores();
+        return ResponseEntity.ok(dArr);
+    }
 }

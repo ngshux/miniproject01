@@ -13,6 +13,7 @@ charIndex = mistakes = isTyping = 0;
 
 function separateLetters(){
     typingText.innerHTML = "";
+    //replace with java command to call sentences
     document.getElementById("generated-poem").innerHTML.split("").array.forEach(element => {
         let spanTag = `<span>${element}</span>`;
         typingText.innerHTML += spanTag;

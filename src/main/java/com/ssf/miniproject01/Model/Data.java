@@ -1,16 +1,26 @@
-package com.ssf.miniproject01;
+package com.ssf.miniproject01.Model;
 
 public class Data {
     private String name;
-    private int wpm;
-    private int cpm;
+    private Integer wpm;
+    private Integer cpm;
+    private Integer score;
 
-    public Data(String name, int wpm, int cpm) {
+    public Data(String name, int wpm, int cpm, int score) {
         this.name = name;
         this.wpm = wpm;
         this.cpm = cpm;
+        this.score = score;
     }
     
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public String getName() {
         return name;
     }

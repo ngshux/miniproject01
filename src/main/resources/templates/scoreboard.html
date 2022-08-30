@@ -4,23 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>     
     <title>Scoreboard</title>
 </head>
-<body>
-    <table>
-        <thead>
-            <tr>
-            <th>Username</th>
-            <th>WPM</th>
-            <th>CPM</th></tr>
-        </thead>
-        <tbody>
-            <tr th:each="temp : ${}">
-                <td th:text="${temp.name}"/>
-                <td th:text="${temp.wpm}"/>
-                <td th:text="${temp.cpm}"/>
+<script>
+    $(document).ready(function(){
+        var html = "";
+        $.ajax({
+            url: '/typing/scoreboard',
+            data: {},
+            contentType : 'application/json',
+            dataType: "json",
+            cache: false,
+            success: function (data) {
+                $.each(data, function (i, val) { 
+                    console.log(val);
 
-            </tr>
+                    html +="<tr>";
+                    html += "<td>" + val.id + "</td>" ;
+                    html += "<td>" + val.name + "</td>" ;
+                    
+                });
+                $("#items").append(html);
+            }
+        });
+    });
+</script>
+<body>
+    <h1>Ranking!</h1>
+    <br>
+    <a href="/new">Add</a>
+    <table>
+        <tbody id="items">
+
         </tbody>
     </table>
 </body>

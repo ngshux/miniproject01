@@ -1,10 +1,11 @@
-package com.ssf.miniproject01;
+package com.ssf.miniproject01.Model;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class Poem {
                 p.sentence = l.get("q").toString();
             }
         }
-        logger.info("AAAAAAAAAAAAAAA"+p.sentence);
+        logger.info("Sentence: "+p.sentence);
         return p;
     }
 
